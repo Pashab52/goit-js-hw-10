@@ -1,32 +1,8 @@
-// fetch(url, options)
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error(response.status);
-//     }
-//     // console.log(response.json());
-//     return response.json();
-//   })
-//   .then(data => {
-//     // Data handling
-//     console.log(data);
-//   })
-//   .catch(error => {
-//     // Error handling
-//   });
-
-import { fetchBreeds } from './JS/cat-api';
+import { fetchBreeds, fetchCatByBreed } from './JS/cat-api';
 
 const refs = {
   selectBreed: document.querySelector('.breed-select'),
-};
-
-const urlSearchByBreeds =
-  'https://api.thecatapi.com/v1/images/search?breed_ids=${breedsId}';
-const options = {
-  headers: {
-    'x-api-key':
-      'live_EEbvOb60XL9UgLJJ7bv9kNbMuHwRbvWrsXT5YGAW7rBTMnO7j1Xmegr3LLfBWJjJ',
-  },
+  catInfo: document.querySelector('.cat-info'),
 };
 
 fetchBreeds()
@@ -37,14 +13,39 @@ fetchBreeds()
     console.log('error');
   });
 
-// console.log(breedsArray);
-
 function createMarkup(data) {
-  data.map(({ name, id }) => {
-    console.log(`<option value="${id}">${name}</option>;`);
+  const breedsArray = data.map(({ name, id }) => {
+    return `<option value="${id}">${name}</option>`;
   });
+  refs.selectBreed.insertAdjacentHTML('beforeend', breedsArray);
+  // refs.selectBreed.innerHTML = breedsArray.join('');
+}
 
-  // console.log(breedsArray);
+refs.selectBreed.addEventListener('change', handleChangeSelect);
 
-  // return `<option value="xs">${}</option>;`
+function handleChangeSelect(event) {
+  if (event.target.value !== '') {
+    fetchCatByBreed(event.target.value)
+      .then(data => {
+        createCatinfoMarkup(data);
+      })
+      .catch(error => {
+        console.log('error');
+      });
+  }
+}
+
+function createCatinfoMarkup(data) {
+  console.log(data);
+  console.log(data[0].url);
+  console.log(data[0].breeds[0].name);
+  console.log(data[0].breeds[0].description);
+  console.log(data[0].breeds[0].temperament);
+
+  const catInfoMarkup = `<img class="cat-img" src="${data[0].url}" alt="cat photo" height="320"/>
+      <h1 class="cat-header">${data[0].breeds[0].name}</h1>
+      <p class="cat-description">${data[0].breeds[0].description}</p>
+      <p class="cat-temperament"><b>Temperament:</b>${data[0].breeds[0].temperament}</p>`;
+
+  refs.catInfo.innerHTML = catInfoMarkup;
 }
