@@ -1,6 +1,9 @@
+import { showLoader } from '../index';
+
 function fetchBreeds() {
   const urlBreeds = 'https://api.thecatapi.com/v1/breeds';
   return fetch(urlBreeds).then(response => {
+    showLoader();
     if (!response.ok) {
       throw new Error(response.status);
     }
@@ -16,6 +19,7 @@ function fetchCatByBreed(breedId) {
         'live_EEbvOb60XL9UgLJJ7bv9kNbMuHwRbvWrsXT5YGAW7rBTMnO7j1Xmegr3LLfBWJjJ',
     },
   };
+  showLoader();
   return fetch(urlSearchByBreeds, options).then(response => {
     if (!response.ok) {
       throw new Error(response.status);
