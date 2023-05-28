@@ -49,12 +49,6 @@ function handleChangeSelect(event) {
 }
 
 function createCatinfoMarkup(data) {
-  console.log(data);
-  console.log(data[0].url);
-  console.log(data[0].breeds[0].name);
-  console.log(data[0].breeds[0].description);
-  console.log(data[0].breeds[0].temperament);
-
   const catInfoMarkup = `<img src="${data[0].url}" alt="cat photo" height="480" width="480"/><div class="descr-wrap"><h1 class="cat-header">${data[0].breeds[0].name}</h1>
   <p class="cat-description">${data[0].breeds[0].description}</p><p class="cat-temperament"><b>Temperament:</b>${data[0].breeds[0].temperament}</p></div>`;
 
@@ -63,11 +57,15 @@ function createCatinfoMarkup(data) {
 
 function showLoader() {
   refs.loader.classList.add('loader');
+  refs.catInfo.classList.add('hidden');
+  refs.selectBreed.classList.add('hidden');
   hideError();
 }
 
 function hideLoader() {
   refs.loader.classList.remove('loader');
+  refs.catInfo.classList.remove('hidden');
+  refs.selectBreed.classList.remove('hidden');
 }
 
 function showError() {
