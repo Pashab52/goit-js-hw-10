@@ -2,8 +2,8 @@ import { showLoader } from '../index';
 
 function fetchBreeds() {
   const urlBreeds = 'https://api.thecatapi.com/v1/breeds';
+  showLoader();
   return fetch(urlBreeds).then(response => {
-    showLoader();
     if (!response.ok) {
       throw new Error(response.status);
     }

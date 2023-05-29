@@ -18,6 +18,7 @@ fetchBreeds()
   })
   .finally(() => {
     hideLoader();
+    showSelect();
   });
 
 function createMarkup(data) {
@@ -49,7 +50,7 @@ function handleChangeSelect(event) {
 }
 
 function createCatinfoMarkup(data) {
-  const catInfoMarkup = `<img src="${data[0].url}" alt="cat photo" height="480" width="480"/><div class="descr-wrap"><h1 class="cat-header">${data[0].breeds[0].name}</h1>
+  const catInfoMarkup = `<img src="${data[0].url}" alt="cat photo" height="540" width="540"/><div class="descr-wrap"><h1 class="cat-header">${data[0].breeds[0].name}</h1>
   <p class="cat-description">${data[0].breeds[0].description}</p><p class="cat-temperament"><b>Temperament:</b>${data[0].breeds[0].temperament}</p></div>`;
 
   refs.catInfo.innerHTML = catInfoMarkup;
@@ -58,14 +59,13 @@ function createCatinfoMarkup(data) {
 function showLoader() {
   refs.loader.classList.add('loader');
   refs.catInfo.classList.add('hidden');
-  refs.selectBreed.classList.add('hidden');
+
   hideError();
 }
 
 function hideLoader() {
   refs.loader.classList.remove('loader');
   refs.catInfo.classList.remove('hidden');
-  refs.selectBreed.classList.remove('hidden');
 }
 
 function showError() {
@@ -74,6 +74,10 @@ function showError() {
 
 function hideError() {
   refs.error.classList.add('error');
+}
+
+function showSelect() {
+  refs.selectBreed.classList.remove('hidden');
 }
 
 export { showLoader };
