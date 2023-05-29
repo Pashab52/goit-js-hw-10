@@ -20,7 +20,9 @@ img {
     font-size: 36px;
 }
  
- /* .cat-temperament  */
+ .cat-temperament{
+    max-width: 1090px;
+ }
 .breed-select{
   max-width: 1090px;
   margin: 0 auto 10 auto;  
