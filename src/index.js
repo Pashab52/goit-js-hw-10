@@ -45,6 +45,9 @@ function createMarkup(data) {
   refs.selectBreed.insertAdjacentHTML('beforeend', breedsArray);
   new SlimSelect({
     select: '#selectElement',
+    settings: {
+      placeholderText: 'Select the breed of the cat',
+    },
   });
   // refs.selectBreed.innerHTML = breedsArray.join('');
 }

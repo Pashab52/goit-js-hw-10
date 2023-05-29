@@ -16,7 +16,9 @@ img {
     border: 1px solid var(--ss-border-color);
         border-radius: var(--ss-border-radius);
 }
-
+.cat-header{
+    font-size: 36px;
+}
  
  /* .cat-temperament  */
 .breed-select{
