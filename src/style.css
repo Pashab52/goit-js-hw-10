@@ -13,18 +13,16 @@ img {
     display: block;
     object-fit: cover;
     border: 1px solid black;
+    border: 1px solid var(--ss-border-color);
+        border-radius: var(--ss-border-radius);
 }
 
  
  /* .cat-temperament  */
 .breed-select{
-    display: block;
-    
-  width: 1090px;
-    border: 1px solid black;
-margin: 0 auto 10 auto;
-   
-    font-size: 16px;
+  max-width: 1090px;
+  margin: 0 auto 10 auto;  
+
 }
 
 .container{
@@ -49,6 +47,8 @@ justify-content: center;
     flex-direction: column;
     border: 1px solid black;
     padding: 15px;
+        border: 1px solid var(--ss-border-color);
+            border-radius: var(--ss-border-radius);
 }
 
 .cat-description{

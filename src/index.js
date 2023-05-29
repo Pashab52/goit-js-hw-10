@@ -2,6 +2,8 @@ import { fetchBreeds, fetchCatByBreed } from './JS/cat-api';
 
 import Notiflix from 'notiflix';
 
+import SlimSelect from 'slim-select';
+
 Notiflix.Notify.init({
   width: '420px',
   position: 'center-top', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
@@ -41,6 +43,9 @@ function createMarkup(data) {
     })
     .join('');
   refs.selectBreed.insertAdjacentHTML('beforeend', breedsArray);
+  new SlimSelect({
+    select: '#selectElement',
+  });
   // refs.selectBreed.innerHTML = breedsArray.join('');
 }
 
@@ -50,7 +55,7 @@ function handleChangeSelect(event) {
   if (event.target.value !== '') {
     fetchCatByBreed(event.target.value)
       .then(data => {
-        createCatinfoMarkup(data);
+        createCatInfoMarkup(data);
       })
       .catch(error => {
         Notiflix.Notify.failure(
@@ -63,7 +68,7 @@ function handleChangeSelect(event) {
   }
 }
 
-function createCatinfoMarkup(data) {
+function createCatInfoMarkup(data) {
   const catInfoMarkup = `<img src="${data[0].url}" alt="cat photo" height="540" width="540"/><div class="descr-wrap"><h1 class="cat-header">${data[0].breeds[0].name}</h1>
   <p class="cat-description">${data[0].breeds[0].description}</p><p class="cat-temperament"><b>Temperament:</b>${data[0].breeds[0].temperament}</p></div>`;
 
