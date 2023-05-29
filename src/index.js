@@ -1,5 +1,15 @@
 import { fetchBreeds, fetchCatByBreed } from './JS/cat-api';
 
+import Notiflix from 'notiflix';
+
+Notiflix.Notify.init({
+  width: '420px',
+  position: 'center-top', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
+
+  rtl: false,
+  timeout: 5000,
+});
+
 const refs = {
   selectBreed: document.querySelector('.breed-select'),
   catInfo: document.querySelector('.cat-info'),
@@ -13,7 +23,10 @@ fetchBreeds()
     createMarkup(data);
   })
   .catch(error => {
-    showError();
+    // showError();
+    Notiflix.Notify.failure(
+      `Oops! Something went wrong! Try reloading the page!`
+    );
     console.log('error');
   })
   .finally(() => {
@@ -40,8 +53,9 @@ function handleChangeSelect(event) {
         createCatinfoMarkup(data);
       })
       .catch(error => {
-        showError();
-        console.log('error');
+        Notiflix.Notify.failure(
+          `Oops! Something went wrong! Try reloading the page!`
+        );
       })
       .finally(() => {
         hideLoader();
@@ -60,7 +74,7 @@ function showLoader() {
   refs.loader.classList.add('loader');
   refs.catInfo.classList.add('hidden');
 
-  hideError();
+  // hideError();
 }
 
 function hideLoader() {
@@ -68,13 +82,13 @@ function hideLoader() {
   refs.catInfo.classList.remove('hidden');
 }
 
-function showError() {
-  refs.error.classList.remove('error');
-}
+// function showError() {
+//   refs.error.classList.remove('error');
+// }
 
-function hideError() {
-  refs.error.classList.add('error');
-}
+// function hideError() {
+//   refs.error.classList.add('error');
+// }
 
 function showSelect() {
   refs.selectBreed.classList.remove('hidden');
